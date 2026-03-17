@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Noto Sans KR', sans-serif;
+  --color-primary: #00c896;
+  --color-primary-dark: #064e3b;
+}
+
+body {
+  margin: 0;
+}
+
+/* Star rating */
+.star-filled {
+  color: #facc15;
+}
+
+/* Marquee animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Marquee clip - 좌우만 잘리고 상하는 플레어 보이게 */
+.marquee-container {
+  overflow: visible;
+  clip-path: inset(-50px 0px);
+}
+
+/* Review card lens flare */
+.review-flare {
+  position: absolute;
+  top: 0px;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* 코어 + 외곽 하나로 통합 */
+.review-flare::before {
+  content: '';
+  position: absolute;
+  top: -42px;
+  left: -42px;
+  width: 84px;
+  height: 84px;
+  background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(0, 220, 150, 0.65) 10%, rgba(0, 210, 150, 0.35) 25%, rgba(0, 200, 150, 0.15) 45%, rgba(0, 200, 150, 0.06) 65%, transparent 85%);
+  border-radius: 50%;
+  filter: blur(2px);
+}
+
+/* 사용 안 함 (호환용) */
+.review-flare-outer {
+  display: none;
+}
+
+/* 가닥 1: 위 (12시) */
+.review-flare-line-a {
+  position: absolute;
+  top: -35px;
+  left: -1px;
+  width: 2px;
+  height: 35px;
+  background: linear-gradient(to top, rgba(255,255,255,0.35) 0%, rgba(0, 210, 150, 0.15) 40%, transparent 100%);
+  filter: blur(0.5px);
+}
+
+/* 가닥 2: 좌하 (약 7시반, 135도) */
+.review-flare-line-b {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 35px;
+  transform-origin: top center;
+  transform: rotate(135deg);
+  background: linear-gradient(to bottom, rgba(255,255,255,0.35) 0%, rgba(0, 210, 150, 0.15) 40%, transparent 100%);
+  filter: blur(0.5px);
+}
+
+/* 가닥 3: 우하 (약 4시반, -135도) */
+.review-flare-line-c {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 35px;
+  transform-origin: top center;
+  transform: rotate(-135deg);
+  background: linear-gradient(to bottom, rgba(255,255,255,0.35) 0%, rgba(0, 210, 150, 0.15) 40%, transparent 100%);
+  filter: blur(0.5px);
+}
